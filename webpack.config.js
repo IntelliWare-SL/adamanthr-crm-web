@@ -14,7 +14,6 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const  {CleanWebpackPlugin}  = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // the path(s) that should be cleaned
 let pathsToClean = [
