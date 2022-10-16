@@ -1,4 +1,3 @@
-
 //main
 import Dashboard from '../MainPage/Main/Dashboard';
 import Apps from '../MainPage/Main/Apps';
@@ -26,81 +25,81 @@ import Employees from '../MainPage/Employees';
 import Projects from '../MainPage/Employees/Projects';
 import Employee from '../MainPage/Employees/Employees';
 
-export default [  
-   {
-      path: 'main',
-      component: Dashboard
-   },
-   {
-      path: 'apps',
-      component: Apps
-   },
-   {
-      path: 'employee',
-      component: Employee
-   },
-   {
-      path: 'employees',
-      component: Employees
-   },
-   {
-      path: 'projects',
-      component: Projects
-   },
-   {
-      path: 'ui-interface',
-      component: UIinterface
-   },
-   {
-      path: 'profile',
-      component: ProfilePage
-   },
-   {
-      path: 'subscription',
-      component: Subscription
-   },
-   {
-      path: 'pages',
-      component: Pages
-   },
-   {
-      path: 'administrator',
-      component: Administrator
-   },
-   {
-      path: 'performance',
-      component: Performance
-   },
-   {
-      path: 'goals',
-      component: Goals
-   },
-   {
-      path: 'performances',
-      component: Performances
-   },
-   {
-      path: 'training',
-      component: Training
-   },
-   {
-      path: 'hr',
-      component: HR
-   },
-   {
-      path: 'reports',
-      component: Reports
-   },
-   {
-      path: 'sales',
-      component: Sales
-   },
-   {
-      path: 'accounts',
-      component: Accounts
-   },
-   {
-      path: 'payroll',
-      component: Payroll
-   }
-]
+export default [
+	{
+		path: 'main',
+		component: Dashboard,
+	},
+	{
+		path: 'apps',
+		component: Apps,
+	},
+	{
+		path: 'employee',
+		component: Employee,
+	},
+	{
+		path: 'employees',
+		component: Employees,
+	},
+	{
+		path: 'projects',
+		component: Projects,
+	},
+	{
+		path: 'ui-interface',
+		component: UIinterface,
+	},
+	{
+		path: 'profile',
+		component: ProfilePage,
+	},
+	{
+		path: 'subscription',
+		component: Subscription,
+	},
+	{
+		path: 'pages',
+		component: Pages,
+	},
+	{
+		path: 'administrator',
+		component: Administrator,
+	},
+	{
+		path: 'performance',
+		component: Performance,
+	},
+	{
+		path: 'goals',
+		component: Goals,
+	},
+	{
+		path: 'performances',
+		component: Performances,
+	},
+	{
+		path: 'training',
+		component: Training,
+	},
+	{
+		path: 'hr',
+		component: HR,
+	},
+	{
+		path: 'reports',
+		component: Reports,
+	},
+	{
+		path: 'sales',
+		component: Sales,
+	},
+	{
+		path: 'accounts',
+		component: Accounts,
+	},
+	{
+		path: 'payroll',
+		component: Payroll,
+	},
+];
