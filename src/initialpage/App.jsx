@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 //Authendication
@@ -20,9 +20,15 @@ import uicomponents from '../MainPage/UIinterface/components';
 //Error Page
 import Error404 from '../MainPage/Pages/ErrorPage/error404';
 import Error500 from '../MainPage/Pages/ErrorPage/error500';
+import { useDispatch } from 'react-redux';
+import MainApp from '../Entryfile/Main';
+import { localAuthenticate } from '../redux/auth/authActions';
 
-export default class App extends Component {
-	componentDidMount() {
+function App(props) {
+	const { location } = props;
+	const dispatch = useDispatch();
+
+	useEffect(() => {
 		if (
 			location.pathname.includes('login') ||
 			location.pathname.includes('register') ||
@@ -37,31 +43,35 @@ export default class App extends Component {
 		) {
 			$('body').addClass('error-page');
 		}
-	}
-	render() {
-		const { location } = this.props;
-		if (location.pathname === '/') {
-			return <Redirect to={'/app/main/dashboard'} />;
-		}
-		return (
-			<Switch>
-				<Route path="/login" component={LoginPage} />
-				<Route path="/forgotpassword" component={ForgotPassword} />
-				<Route path="/register" component={RegistrationPage} />
-				<Route path="/otp" component={OTP} />
-				<Route path="/lockscreen" component={LockScreen} />
-				<Route path="/applyjob" component={ApplyJobs} />
+	}, []);
 
-				<Route path="/app" component={DefaultLayout} />
-				<Route path="/settings" component={Settinglayout} />
-				<Route path="/tasks" component={Tasklayout} />
-				<Route path="/email" component={Emaillayout} />
-				<Route path="/conversation" component={chatlayout} />
+	useEffect(() => {
+		dispatch(localAuthenticate());
+	}, [location]);
 
-				<Route path="/ui-components" component={uicomponents} />
-				<Route path="/error-404" component={Error404} />
-				<Route path="/error-500" component={Error500} />
-			</Switch>
-		);
+	if (location.pathname === '/') {
+		return <Redirect to={'/login'} />;
 	}
+	return (
+		<Switch>
+			<Route path="/login" component={LoginPage} />
+			<Route path="/forgotpassword" component={ForgotPassword} />
+			<Route path="/register" component={RegistrationPage} />
+			<Route path="/otp" component={OTP} />
+			<Route path="/lockscreen" component={LockScreen} />
+			<Route path="/applyjob" component={ApplyJobs} />
+
+			<Route path="/app" component={DefaultLayout} />
+			<Route path="/settings" component={Settinglayout} />
+			<Route path="/tasks" component={Tasklayout} />
+			<Route path="/email" component={Emaillayout} />
+			<Route path="/conversation" component={chatlayout} />
+
+			<Route path="/ui-components" component={uicomponents} />
+			<Route path="/error-404" component={Error404} />
+			<Route path="/error-500" component={Error500} />
+		</Switch>
+	);
 }
+
+export default App;

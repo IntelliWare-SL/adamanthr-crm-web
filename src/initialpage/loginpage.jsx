@@ -10,6 +10,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { alphaNumericPattern, emailrgx } from '../constant';
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../redux/auth/authActions';
 
 const schema = yup.object({
 	email: yup
@@ -21,13 +23,14 @@ const schema = yup.object({
 });
 
 const Loginpage = (props) => {
+	const dispatch = useDispatch();
 	const [eye, seteye] = useState(true);
 	const [emailerror, setEmailError] = useState('');
 	const [nameerror, setNameError] = useState('');
 	const [passworderror, setPasswordError] = useState('');
 	const [formgroup, setFormGroup] = useState('');
 	const [inputValues, setInputValues] = useState({
-		email: 'admin@dreamguys.co.in',
+		email: 'admin@gmail.com',
 		password: '123456',
 	});
 
@@ -42,16 +45,15 @@ const Loginpage = (props) => {
 	});
 
 	const onSubmit = (data) => {
-		console.log('data', data);
-
-		if (data.password != '123456') {
+		dispatch(userLogin(data, props.history));
+		/*if (data.password != '123456') {
 			setError('password', {
 				message: 'password is mismatch',
 			});
 		} else {
 			clearErrors('password');
 			props.history.push('/app/main/dashboard');
-		}
+		}*/
 	};
 
 	const onEyeClick = () => {
@@ -98,7 +100,7 @@ const Loginpage = (props) => {
 													autoComplete="false"
 												/>
 											)}
-											defaultValue="admin@dreamguys.co.in"
+											defaultValue="admin@gmail.com"
 										/>
 										<small>{errors?.email?.message}</small>
 									</div>

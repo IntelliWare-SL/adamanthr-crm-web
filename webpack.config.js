@@ -58,9 +58,8 @@ module.exports = {
 	externals: {
 		// global app config object
 		config: JSON.stringify({
-			apiUrl: '',
+			apiUrl: 'http://localhost:3000/api/v1',
 			imageapiUrl: '',
-
 			publicPath: '/light',
 		}),
 	},

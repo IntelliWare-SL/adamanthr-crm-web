@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from '../initialpage/App';
 import config from 'config';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import 'bootstrap';
 
 import 'bootstrap/dist/js/bootstrap.bundle';
@@ -27,14 +30,20 @@ import '../assets/js/multiselect.min.js';
 import '../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css';
 import '../assets/css/bootstrap-datetimepicker.min.css';
 import '../assets/css/style.css';
+import { useDispatch } from 'react-redux';
 window.Popper = require('popper.js').default;
 
-const MainApp = () => (
-	<Router basename={`${config.publicPath}`}>
-		<Switch>
-			<Route path="/" component={App} />
-		</Switch>
-	</Router>
-);
+function MainApp(props) {
+	return (
+		<>
+			<Router basename={`${config.publicPath}`}>
+				<Switch>
+					<Route path="/" component={App} />
+				</Switch>
+			</Router>
+			<ToastContainer />
+		</>
+	);
+}
 
 export default MainApp;

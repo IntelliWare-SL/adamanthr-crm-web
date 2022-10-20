@@ -20,8 +20,11 @@ import {
 	Avatar_17,
 	Avatar_21,
 } from '../../Entryfile/imagepath';
+import { useDispatch } from 'react-redux';
+import { userLogout } from '../../redux/auth/authActions';
 
 const Header = (props) => {
+	const dispatch = useDispatch();
 	const handlesidebar = () => {
 		document.body.classList.toggle('mini-sidebar');
 	};
@@ -441,7 +444,13 @@ const Header = (props) => {
 						<Link className="dropdown-item" to="/settings/companysetting">
 							Settings
 						</Link>
-						<Link className="dropdown-item" to="/login">
+						<Link
+							className="dropdown-item"
+							to="/login"
+							onClick={() => {
+								dispatch(userLogout());
+							}}
+						>
 							Logout
 						</Link>
 					</div>
