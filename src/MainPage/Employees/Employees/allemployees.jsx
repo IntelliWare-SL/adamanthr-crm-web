@@ -7,15 +7,15 @@ import {
 	Avatar_03,
 	Avatar_04,
 	Avatar_05,
-	Avatar_11,
-	Avatar_12,
+	Avatar_08,
 	Avatar_09,
 	Avatar_10,
-	Avatar_08,
+	Avatar_11,
+	Avatar_12,
 	Avatar_13,
 	Avatar_16,
 } from '../../../Entryfile/imagepath';
-import Addemployee from '../../../_components/modelbox/Addemployee';
+import AddEmployee from '../../../_components/modelbox/AddEmployee';
 import Editemployee from '../../../_components/modelbox/Editemployee';
 import Header from '../../../initialpage/Sidebar/header';
 import Sidebar from '../../../initialpage/Sidebar/sidebar';
@@ -623,7 +623,7 @@ const AllEmployees = () => {
 				</div>
 				{/* /Page Content */}
 				{/* Add Employee Modal */}
-				<Addemployee />
+				<AddEmployee />
 				{/* /Add Employee Modal */}
 				{/* Edit Employee Modal */}
 				<Editemployee />
