@@ -3,46 +3,65 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const initialState = {
-	userAccountLoading: false,
-	employeeDetailsLoading: false,
+	employeesLoading: false,
+	userAccountFormLoading: false,
+	employeeDetailsFormLoading: false,
+	employees: null,
 	createdAccountUid: null,
 };
 
 function reducer(state = initialState, action) {
 	switch (action.type) {
+		case employeeActionTypes.GET_ALL_EMPLOYEES:
+			return {
+				...state,
+				employeesLoading: true,
+			};
+		case employeeActionTypes.GET_ALL_EMPLOYEES_SUCCESS:
+			return {
+				...state,
+				employeesLoading: false,
+				employees: action.data,
+			};
+		case employeeActionTypes.GET_ALL_EMPLOYEES_FAILED:
+			return {
+				...state,
+				employeesLoading: false,
+				employees: null,
+			};
 		case employeeActionTypes.REGISTER_USER:
 			return {
 				...state,
-				userAccountLoading: true,
+				userAccountFormLoading: true,
 			};
 		case employeeActionTypes.REGISTER_USER_SUCCESS:
 			return {
 				...state,
-				userAccountLoading: false,
+				userAccountFormLoading: false,
 				createdAccountUid: action.data.id,
 			};
 		case employeeActionTypes.REGISTER_USER_FAILED:
 			return {
 				...state,
-				userAccountLoading: false,
+				userAccountFormLoading: false,
 				createdAccountUid: null,
 			};
 		case employeeActionTypes.ADD_EMPLOYEE_DETAILS:
 			return {
 				...state,
-				employeeDetailsLoading: true,
+				employeeDetailsFormLoading: true,
 			};
 		case employeeActionTypes.ADD_EMPLOYEE_DETAILS_SUCCESS:
 			return {
 				...state,
-				userAccountLoading: false,
-				employeeDetailsLoading: false,
+				userAccountFormLoading: false,
+				employeeDetailsFormLoading: false,
 				createdAccountUid: null,
 			};
 		case employeeActionTypes.ADD_EMPLOYEE_DETAILS_FAILED:
 			return {
 				...state,
-				userAccountLoading: false,
+				userAccountFormLoading: false,
 				createdAccountUid: null,
 			};
 		default:

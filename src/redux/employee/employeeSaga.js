@@ -12,7 +12,7 @@ export function* registerUserSaga({ payload }) {
 			data,
 		});
 	} catch (e) {
-		toast.error(e.response?.data?.message || 'User Registration Error');
+		toast.error(e.response?.data?.message || 'Error in registering user');
 		yield put({ type: employeeActionTypes.REGISTER_USER_FAILED });
 		console.log(e);
 	}
@@ -28,14 +28,31 @@ export function* addEmployeeDetailsSaga({ payload }) {
 		});
 	} catch (e) {
 		toast.error(
-			e.response?.data?.message || 'Employee Detail Submission Error'
+			e.response?.data?.message || 'Error in adding employee details'
 		);
 		yield put({ type: employeeActionTypes.ADD_EMPLOYEE_DETAILS_FAILED });
 		console.log(e);
 	}
 }
 
+export function* getAllEmployeesSaga() {
+	try {
+		const { data } = yield API.get(`users/admin/getAllEmployees`);
+		yield put({
+			type: employeeActionTypes.GET_ALL_EMPLOYEES_SUCCESS,
+			data,
+		});
+	} catch (e) {
+		toast.error(
+			e.response?.data?.message || 'Error in retrieving employee data'
+		);
+		yield put({ type: employeeActionTypes.GET_ALL_EMPLOYEES_FAILED });
+		console.log(e);
+	}
+}
+
 function* watchSagas() {
+	yield takeEvery(employeeActionTypes.GET_ALL_EMPLOYEES, getAllEmployeesSaga);
 	yield takeEvery(employeeActionTypes.REGISTER_USER, registerUserSaga);
 	yield takeEvery(
 		employeeActionTypes.ADD_EMPLOYEE_DETAILS,

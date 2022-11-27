@@ -8,10 +8,10 @@ import {
 
 const AddEmployee = () => {
 	const isUserAccountLoading = useSelector(
-		(state) => state.employee.userAccountLoading
+		(state) => state.employee.userAccountFormLoading
 	);
 	const isEmployeeDetailsLoading = useSelector(
-		(state) => state.employee.employeeDetailsloading
+		(state) => state.employee.employeeDetailsFormLoading
 	);
 	const createdAccountUid = useSelector(
 		(state) => state.employee.createdAccountUid
