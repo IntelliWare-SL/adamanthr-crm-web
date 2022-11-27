@@ -3,6 +3,22 @@ import { employeeActionTypes } from './employeeActions';
 import { API } from '../../utils/axios';
 import { toast } from 'react-toastify';
 
+export function* getAllEmployeesSaga() {
+	try {
+		const { data } = yield API.get(`users/admin/getAllEmployees`);
+		yield put({
+			type: employeeActionTypes.GET_ALL_EMPLOYEES_SUCCESS,
+			data,
+		});
+	} catch (e) {
+		toast.error(
+			e.response?.data?.message || 'Error in retrieving employee data'
+		);
+		yield put({ type: employeeActionTypes.GET_ALL_EMPLOYEES_FAILED });
+		console.log(e);
+	}
+}
+
 export function* registerUserSaga({ payload }) {
 	try {
 		const { data } = yield API.post(`users/admin/registerUser`, payload);
@@ -31,22 +47,6 @@ export function* addEmployeeDetailsSaga({ payload }) {
 			e.response?.data?.message || 'Error in adding employee details'
 		);
 		yield put({ type: employeeActionTypes.ADD_EMPLOYEE_DETAILS_FAILED });
-		console.log(e);
-	}
-}
-
-export function* getAllEmployeesSaga() {
-	try {
-		const { data } = yield API.get(`users/admin/getAllEmployees`);
-		yield put({
-			type: employeeActionTypes.GET_ALL_EMPLOYEES_SUCCESS,
-			data,
-		});
-	} catch (e) {
-		toast.error(
-			e.response?.data?.message || 'Error in retrieving employee data'
-		);
-		yield put({ type: employeeActionTypes.GET_ALL_EMPLOYEES_FAILED });
 		console.log(e);
 	}
 }

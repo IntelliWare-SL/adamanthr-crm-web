@@ -61,8 +61,7 @@ function reducer(state = initialState, action) {
 		case employeeActionTypes.ADD_EMPLOYEE_DETAILS_FAILED:
 			return {
 				...state,
-				userAccountFormLoading: false,
-				createdAccountUid: null,
+				employeeDetailsFormLoading: false,
 			};
 		default:
 			return state;

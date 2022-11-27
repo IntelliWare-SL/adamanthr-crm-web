@@ -26,11 +26,11 @@ const AddEmployee = () => {
 
 	const UserAccountScreen = () => {
 		const onSubmit = (data) => {
-			data.role = 'employee';
-			data.is_phone_verified = false;
-			delete data.confirm_password;
+			data.user.role = 'employee';
+			data.user.is_phone_verified = false;
+			delete data.user.confirm_password;
 
-			dispatch(registerUser(data));
+			dispatch(registerUser(data.user));
 		};
 
 		return (
@@ -50,7 +50,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('first_name')}
+									{...register('user.first_name')}
 								/>
 							</div>
 						</div>
@@ -63,7 +63,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('last_name')}
+									{...register('user.last_name')}
 								/>
 							</div>
 						</div>
@@ -76,7 +76,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="email"
-									{...register('email')}
+									{...register('user.email')}
 								/>
 							</div>
 						</div>
@@ -89,7 +89,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('contact_no')}
+									{...register('user.contact_no')}
 								/>
 							</div>
 						</div>
@@ -98,7 +98,11 @@ const AddEmployee = () => {
 								<label className="col-form-label">
 									Gender <span className="text-danger">*</span>
 								</label>
-								<select required className="select" {...register('gender')}>
+								<select
+									required
+									className="select"
+									{...register('user.gender')}
+								>
 									<option value="Male">Male</option>
 									<option value="Female">Female</option>
 								</select>
@@ -109,7 +113,11 @@ const AddEmployee = () => {
 								<label className="col-form-label">
 									Status <span className="text-danger">*</span>
 								</label>
-								<select required className="select" {...register('status')}>
+								<select
+									required
+									className="select"
+									{...register('user.status')}
+								>
 									<option value="active">Active</option>
 									<option value="inactive">Inactive</option>
 									<option value="deleted">Deleted</option>
@@ -125,7 +133,7 @@ const AddEmployee = () => {
 									className="form-control"
 									autoComplete="new-password"
 									type="password"
-									{...register('password')}
+									{...register('user.password')}
 								/>
 							</div>
 						</div>
@@ -138,7 +146,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="password"
-									{...register('confirm_password')}
+									{...register('user.confirm_password')}
 								/>
 							</div>
 						</div>
@@ -151,7 +159,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('address.street')}
+									{...register('user.address.street')}
 								/>
 							</div>
 						</div>
@@ -164,7 +172,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('address.city')}
+									{...register('user.address.city')}
 								/>
 							</div>
 						</div>
@@ -177,7 +185,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('address.postal_code')}
+									{...register('user.address.postal_code')}
 								/>
 							</div>
 						</div>
@@ -190,7 +198,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('address.country')}
+									{...register('user.address.country')}
 								/>
 							</div>
 						</div>
@@ -225,8 +233,8 @@ const AddEmployee = () => {
 
 	const EmployeeDetailsScreen = () => {
 		const onSubmit = (data) => {
-			data.id = createdAccountUid;
-			dispatch(addEmployeeDetails(data));
+			data.employee_details.id = createdAccountUid;
+			dispatch(addEmployeeDetails(data.employee_details));
 		};
 
 		return (
@@ -246,7 +254,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="date"
-									{...register('date_of_join')}
+									{...register('employee_details.date_of_join')}
 								/>
 							</div>
 						</div>
@@ -259,7 +267,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('employee_id')}
+									{...register('employee_details.employee_id')}
 								/>
 							</div>
 						</div>
@@ -272,7 +280,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('adamant_code')}
+									{...register('employee_details.adamant_code')}
 								/>
 							</div>
 						</div>
@@ -282,7 +290,7 @@ const AddEmployee = () => {
 								<input
 									className="form-control"
 									type="date"
-									{...register('dol')}
+									{...register('employee_details.dol')}
 								/>
 							</div>
 						</div>
@@ -295,7 +303,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('designation')}
+									{...register('employee_details.designation')}
 								/>
 							</div>
 						</div>
@@ -304,7 +312,11 @@ const AddEmployee = () => {
 								<label className="col-form-label">
 									Supervisor <span className="text-danger">*</span>
 								</label>
-								<select required className="select" {...register('supervisor')}>
+								<select
+									required
+									className="select"
+									{...register('employee_details.supervisor')}
+								>
 									<option value="9342650b-b9ab-45eb-b37d-bb3a9d12ac6c">
 										Super Admin
 									</option>
@@ -320,7 +332,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('job_location')}
+									{...register('employee_details.job_location')}
 								/>
 							</div>
 						</div>
@@ -333,7 +345,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('job_location_state')}
+									{...register('employee_details.job_location_state')}
 								/>
 							</div>
 						</div>
@@ -347,7 +359,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('on_roll')}
+									{...register('employee_details.on_roll')}
 								/>
 							</div>
 						</div>
@@ -360,7 +372,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="date"
-									{...register('dob')}
+									{...register('employee_details.dob')}
 								/>
 							</div>
 						</div>
@@ -373,7 +385,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('emergency_no')}
+									{...register('employee_details.emergency_no')}
 								/>
 							</div>
 						</div>
@@ -386,7 +398,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('self_aadhar_no')}
+									{...register('employee_details.self_aadhar_no')}
 								/>
 							</div>
 						</div>
@@ -399,7 +411,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('qualification')}
+									{...register('employee_details.qualification')}
 								/>
 							</div>
 						</div>
@@ -412,7 +424,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('father_name')}
+									{...register('employee_details.father_name')}
 								/>
 							</div>
 						</div>
@@ -425,7 +437,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('mother_name')}
+									{...register('employee_details.mother_name')}
 								/>
 							</div>
 						</div>
@@ -438,7 +450,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('spouse_name')}
+									{...register('employee_details.spouse_name')}
 								/>
 							</div>
 						</div>
@@ -451,7 +463,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('esic_no')}
+									{...register('employee_details.esic_no')}
 								/>
 							</div>
 						</div>
@@ -464,7 +476,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('uan')}
+									{...register('employee_details.uan')}
 								/>
 							</div>
 						</div>
@@ -477,7 +489,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('pan_no')}
+									{...register('employee_details.pan_no')}
 								/>
 							</div>
 						</div>
@@ -490,7 +502,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('account_no')}
+									{...register('employee_details.account_no')}
 								/>
 							</div>
 						</div>
@@ -500,7 +512,7 @@ const AddEmployee = () => {
 								<input
 									className="form-control"
 									type="text"
-									{...register('ifsc_code')}
+									{...register('employee_details.ifsc_code')}
 								/>
 							</div>
 						</div>
@@ -510,7 +522,7 @@ const AddEmployee = () => {
 								<input
 									className="form-control"
 									type="text"
-									{...register('bank_name')}
+									{...register('employee_details.bank_name')}
 								/>
 							</div>
 						</div>
@@ -523,7 +535,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('permanent_address')}
+									{...register('employee_details.permanent_address')}
 								/>
 							</div>
 						</div>
@@ -536,7 +548,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="text"
-									{...register('correspondence_address')}
+									{...register('employee_details.correspondence_address')}
 								/>
 							</div>
 						</div>
@@ -549,7 +561,7 @@ const AddEmployee = () => {
 									required
 									className="form-control"
 									type="number"
-									{...register('daily_rate')}
+									{...register('employee_details.daily_rate')}
 								/>
 							</div>
 						</div>

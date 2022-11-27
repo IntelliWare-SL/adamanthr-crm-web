@@ -36,57 +36,52 @@ const AllEmployees = () => {
 		}
 	}, []);
 
-	const renderEmployees = () => {
-		return (
-			<>
-				{employees.map((employee) => (
-					<div className="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-						<div className="profile-widget">
-							<div className="profile-img">
-								<Link to="/app/profile/employee-profile" className="avatar">
-									<img src={Avatar_01} alt="" />
-								</Link>
-							</div>
-							<div className="dropdown profile-action">
-								<a
-									href="#"
-									className="action-icon dropdown-toggle"
-									data-bs-toggle="dropdown"
-									aria-expanded="false"
-								>
-									<i className="material-icons">more_vert</i>
-								</a>
-								<div className="dropdown-menu dropdown-menu-right">
-									<a
-										className="dropdown-item"
-										href="#"
-										data-bs-toggle="modal"
-										data-bs-target="#edit_employee"
-									>
-										<i className="fa fa-pencil m-r-5" /> Edit
-									</a>
-									<a
-										className="dropdown-item"
-										href="#"
-										data-bs-toggle="modal"
-										data-bs-target="#delete_employee"
-									>
-										<i className="fa fa-trash-o m-r-5" /> Delete
-									</a>
-								</div>
-							</div>
-							<h4 className="user-name m-t-10 mb-0 text-ellipsis">
-								<Link to="/app/profile/employee-profile">
-									{employee.first_name + ' ' + employee.last_name}{' '}
-								</Link>
-							</h4>
-							<div className="small text-muted">{employee.designation}</div>
+	const renderEmployees = () =>
+		employees.data.map((employee) => (
+			<div className="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+				<div className="profile-widget">
+					<div className="profile-img">
+						<Link to="/app/profile/employee-profile" className="avatar">
+							<img src={Avatar_01} alt="" />
+						</Link>
+					</div>
+					<div className="dropdown profile-action">
+						<a
+							href="#"
+							className="action-icon dropdown-toggle"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							<i className="material-icons">more_vert</i>
+						</a>
+						<div className="dropdown-menu dropdown-menu-right">
+							<a
+								className="dropdown-item"
+								href="#"
+								data-bs-toggle="modal"
+								data-bs-target="#edit_employee"
+							>
+								<i className="fa fa-pencil m-r-5" /> Edit
+							</a>
+							<a
+								className="dropdown-item"
+								href="#"
+								data-bs-toggle="modal"
+								data-bs-target="#delete_employee"
+							>
+								<i className="fa fa-trash-o m-r-5" /> Delete
+							</a>
 						</div>
 					</div>
-				))}
-			</>
-		);
-	};
+					<h4 className="user-name m-t-10 mb-0 text-ellipsis">
+						<Link to="/app/profile/employee-profile">
+							{employee.first_name + ' ' + employee.last_name}{' '}
+						</Link>
+					</h4>
+					<div className="small text-muted">{employee.designation}</div>
+				</div>
+			</div>
+		));
 
 	return (
 		<div className={`main-wrapper ${menu ? 'slide-nav' : ''}`}>
@@ -120,7 +115,7 @@ const AllEmployees = () => {
 								>
 									<i className="fa fa-plus" /> Add Employee
 								</a>
-								{employees && employees.length > 0 && (
+								{employees && employees.data.length > 0 && (
 									<div className="view-icons">
 										<Link
 											to="/app/employee/allemployees"
@@ -151,7 +146,7 @@ const AllEmployees = () => {
 							<span className="sr-only">Loading...</span>
 						</div>
 					) : employees ? (
-						employees.length > 0 ? (
+						employees.data.length > 0 ? (
 							<div>
 								<div className="row filter-row">
 									<div className="col-sm-6 col-md-3">
@@ -186,7 +181,7 @@ const AllEmployees = () => {
 									</div>
 								</div>
 								{/* Search Filter */}
-								<div className="row staff-grid-row">{renderEmployees}</div>
+								<div className="row staff-grid-row">{renderEmployees()}</div>
 							</div>
 						) : (
 							<div className="text-center p-4">
