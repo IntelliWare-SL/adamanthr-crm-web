@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Table } from 'antd';
@@ -8,14 +8,14 @@ import '../../antdstyle.css';
 import {
 	Avatar_02,
 	Avatar_05,
-	Avatar_11,
-	Avatar_12,
 	Avatar_09,
 	Avatar_10,
+	Avatar_11,
+	Avatar_12,
 	Avatar_13,
 } from '../../../Entryfile/imagepath';
 import Editemployee from '../../../_components/modelbox/Editemployee';
-import Addemployee from '../../../_components/modelbox/Addemployee';
+import AddEmployee from '../../../_components/modelbox/AddEmployee';
 import Header from '../../../initialpage/Sidebar/header';
 import Sidebar from '../../../initialpage/Sidebar/sidebar';
 
@@ -319,7 +319,7 @@ const Employeeslist = () => {
 				</div>
 				{/* /Page Content */}
 				{/* Add Employee Modal */}
-				<Addemployee />
+				<AddEmployee />
 				{/* /Add Employee Modal */}
 				{/* Edit Employee Modal */}
 				<Editemployee />
