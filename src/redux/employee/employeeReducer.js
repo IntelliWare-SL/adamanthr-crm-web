@@ -8,6 +8,7 @@ const initialState = {
 	employeeDetailsFormLoading: false,
 	employees: null,
 	createdAccountUid: null,
+	updatedAccountUid: null,
 };
 
 function reducer(state = initialState, action) {
@@ -59,6 +60,39 @@ function reducer(state = initialState, action) {
 				createdAccountUid: null,
 			};
 		case employeeActionTypes.ADD_EMPLOYEE_DETAILS_FAILED:
+			return {
+				...state,
+				employeeDetailsFormLoading: false,
+			};
+		case employeeActionTypes.UPDATE_USER:
+			return {
+				...state,
+				userAccountFormLoading: true,
+			};
+		case employeeActionTypes.UPDATE_USER_SUCCESS:
+			return {
+				...state,
+				userAccountFormLoading: false,
+				updatedAccountUid: action.data.id,
+			};
+		case employeeActionTypes.UPDATE_USER_FAILED:
+			return {
+				...state,
+				userAccountFormLoading: false,
+				updatedAccountUid: null,
+			};
+		case employeeActionTypes.UPDATE_EMPLOYEE_DETAILS:
+			return {
+				...state,
+				employeeDetailsFormLoading: true,
+			};
+		case employeeActionTypes.UPDATE_EMPLOYEE_DETAILS_SUCCESS:
+			return {
+				...state,
+				employeeDetailsFormLoading: false,
+				updatedAccountUid: null,
+			};
+		case employeeActionTypes.UPDATE_EMPLOYEE_DETAILS_FAILED:
 			return {
 				...state,
 				employeeDetailsFormLoading: false,

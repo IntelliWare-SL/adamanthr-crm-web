@@ -51,12 +51,52 @@ export function* addEmployeeDetailsSaga({ payload }) {
 	}
 }
 
+export function* updateUserSaga({ payload }) {
+	try {
+		const { data } = yield API.put(`users/admin/updateUser`, payload);
+		toast.success('User account updated successfully');
+		yield put({
+			type: employeeActionTypes.UPDATE_USER_SUCCESS,
+			data,
+		});
+	} catch (e) {
+		toast.error(e.response?.data?.message || 'Error in updating user');
+		yield put({ type: employeeActionTypes.UPDATE_USER_FAILED });
+		console.log(e);
+	}
+}
+
+export function* updateEmployeeDetailsSaga({ payload }) {
+	try {
+		const { data } = yield API.post(
+			`users/admin/updateEmployeeDetails`,
+			payload
+		);
+		toast.success('Employee details updated successfully');
+		yield put({
+			type: employeeActionTypes.UPDATE_EMPLOYEE_DETAILS_SUCCESS,
+			data,
+		});
+	} catch (e) {
+		toast.error(
+			e.response?.data?.message || 'Error in updating employee details'
+		);
+		yield put({ type: employeeActionTypes.UPDATE_EMPLOYEE_DETAILS_FAILED });
+		console.log(e);
+	}
+}
+
 function* watchSagas() {
 	yield takeEvery(employeeActionTypes.GET_ALL_EMPLOYEES, getAllEmployeesSaga);
 	yield takeEvery(employeeActionTypes.REGISTER_USER, registerUserSaga);
 	yield takeEvery(
 		employeeActionTypes.ADD_EMPLOYEE_DETAILS,
 		addEmployeeDetailsSaga
+	);
+	yield takeEvery(employeeActionTypes.UPDATE_USER, updateUserSaga);
+	yield takeEvery(
+		employeeActionTypes.UPDATE_EMPLOYEE_DETAILS,
+		updateEmployeeDetailsSaga
 	);
 }
 

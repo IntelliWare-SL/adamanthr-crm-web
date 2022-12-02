@@ -8,6 +8,12 @@ export const employeeActionTypes = {
 	GET_ALL_EMPLOYEES: 'employee/get_all_employees',
 	GET_ALL_EMPLOYEES_SUCCESS: 'employee/get_all_employees_success',
 	GET_ALL_EMPLOYEES_FAILED: 'employee/get_all_employees_failed',
+	UPDATE_USER: 'employee/update_user',
+	UPDATE_USER_SUCCESS: 'employee/update_user_success',
+	UPDATE_USER_FAILED: 'employee/update_user_failed',
+	UPDATE_EMPLOYEE_DETAILS: 'employee/update_details',
+	UPDATE_EMPLOYEE_DETAILS_SUCCESS: 'employee/update_details_success',
+	UPDATE_EMPLOYEE_DETAILS_FAILED: 'employee/update_details_failed',
 };
 
 export function registerUser(payload) {
@@ -20,4 +26,12 @@ export function addEmployeeDetails(payload) {
 
 export function getAllEmployees() {
 	return { type: employeeActionTypes.GET_ALL_EMPLOYEES };
+}
+
+export function updateUser(payload) {
+	return { type: employeeActionTypes.UPDATE_USER, payload };
+}
+
+export function updateEmployeeDetails(payload) {
+	return { type: employeeActionTypes.UPDATE_EMPLOYEE_DETAILS, payload };
 }
