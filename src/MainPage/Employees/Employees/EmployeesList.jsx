@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { Avatar_01 } from '../../../Entryfile/imagepath';
+import { Table } from 'antd';
+import 'antd/dist/antd.css';
+import { itemRender, onShowSizeChange } from '../../paginationfunction';
+import '../../antdstyle.css';
+import EditEmployee from '../../../_components/modelbox/Editemployee';
 import AddEmployee from '../../../_components/modelbox/AddEmployee';
-import Editemployee from '../../../_components/modelbox/Editemployee';
 import Header from '../../../initialpage/Sidebar/header';
 import Sidebar from '../../../initialpage/Sidebar/sidebar';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllEmployees } from '../../../redux/employee/employeeActions';
+import { useSelector } from 'react-redux';
 
-const AllEmployees = () => {
+const EmployeesList = () => {
 	const [menu, setMenu] = useState(false);
-	const dispatch = useDispatch();
 	const isEmployeeDataLoading = useSelector(
 		(state) => state.employee.employeesLoading
 	);
@@ -30,22 +31,57 @@ const AllEmployees = () => {
 		}
 	});
 
-	useEffect(() => {
-		if (employees == null) {
-			dispatch(getAllEmployees());
-		}
-	}, []);
+	const renderEmployeeTable = () => {
+		const columns = [
+			{
+				title: 'Employee ID',
+				dataIndex: 'employee_id',
+				sorter: (a, b) => a.employee_id - b.employee_id,
+			},
+			{
+				title: 'Name',
+				render: (text, record) => (
+					<span>{record.first_name + ' ' + record.last_name}</span>
+				),
+				sorter: (a, b) => a.first_name - b.first_name,
+			},
+			{
+				title: 'Designation',
+				dataIndex: 'designation',
+				sorter: (a, b) => a.designation - b.designation,
+			},
+			{
+				title: 'Gender',
+				dataIndex: 'gender',
+				sorter: (a, b) => a.gender - b.gender,
+			},
+			{
+				title: 'Email',
+				dataIndex: 'email',
+			},
 
-	const renderEmployeeCards = () =>
-		employees.data.map((employee) => (
-			<div className="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-				<div className="profile-widget">
-					<div className="profile-img">
-						<Link to="/app/profile/employee-profile" className="avatar">
-							<img src={Avatar_01} alt="" />
-						</Link>
-					</div>
-					<div className="dropdown profile-action">
+			{
+				title: 'Contact No',
+				dataIndex: 'contact_no',
+			},
+
+			{
+				title: 'Joined Date',
+				dataIndex: 'date_of_join',
+				render: (text, record) => (
+					<span>{new Date(record.date_of_join).toLocaleDateString()}</span>
+				),
+				sorter: (a, b) => a.date_of_join.length - b.date_of_join.length,
+			},
+			{
+				title: 'Status',
+				dataIndex: 'status',
+				sorter: (a, b) => a.status - b.status,
+			},
+			{
+				title: 'Action',
+				render: (text, record) => (
+					<div className="dropdown dropdown-action text-end">
 						<a
 							href="#"
 							className="action-icon dropdown-toggle"
@@ -73,15 +109,31 @@ const AllEmployees = () => {
 							</a>
 						</div>
 					</div>
-					<h4 className="user-name m-t-10 mb-0 text-ellipsis">
-						<Link to="/app/profile/employee-profile">
-							{employee.first_name + ' ' + employee.last_name}
-						</Link>
-					</h4>
-					<div className="small text-muted">{employee.designation}</div>
-				</div>
+				),
+			},
+		];
+
+		return (
+			<div className="table-responsive">
+				<Table
+					className="table-striped"
+					pagination={{
+						total: employees.data.length,
+						showTotal: (total, range) =>
+							`Showing ${range[0]} to ${range[1]} of ${total} entries`,
+						showSizeChanger: true,
+						onShowSizeChange: onShowSizeChange,
+						itemRender: itemRender,
+					}}
+					style={{ overflowX: 'auto' }}
+					columns={columns}
+					// bordered
+					dataSource={employees.data}
+					rowKey={(record) => record.id}
+				/>
 			</div>
-		));
+		);
+	};
 
 	return (
 		<div className={`main-wrapper ${menu ? 'slide-nav' : ''}`}>
@@ -180,9 +232,9 @@ const AllEmployees = () => {
 										</a>
 									</div>
 								</div>
-								{/* Search Filter */}
-								<div className="row staff-grid-row">
-									{renderEmployeeCards()}
+								{/* /Search Filter */}
+								<div className="row">
+									<div className="col-md-12">{renderEmployeeTable()}</div>
 								</div>
 							</div>
 						) : (
@@ -201,7 +253,7 @@ const AllEmployees = () => {
 				<AddEmployee />
 				{/* /Add Employee Modal */}
 				{/* Edit Employee Modal */}
-				<Editemployee />
+				<EditEmployee />
 				{/* /Edit Employee Modal */}
 				{/* Delete Employee Modal */}
 				<div
@@ -244,4 +296,4 @@ const AllEmployees = () => {
 	);
 };
 
-export default AllEmployees;
+export default EmployeesList;

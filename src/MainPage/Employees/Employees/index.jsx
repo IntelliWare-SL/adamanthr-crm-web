@@ -6,7 +6,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AllEmployees from './AllEmployees';
-import AllEmployeesList from './employeeslist';
+import AllEmployeesList from './EmployeesList';
 import Holidays from './holidays';
 import LeaveAdmin from './leave_admin';
 import LeaveEmployee from './leaveemployee';
