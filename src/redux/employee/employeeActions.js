@@ -14,6 +14,9 @@ export const employeeActionTypes = {
 	UPDATE_EMPLOYEE_DETAILS: 'employee/update_details',
 	UPDATE_EMPLOYEE_DETAILS_SUCCESS: 'employee/update_details_success',
 	UPDATE_EMPLOYEE_DETAILS_FAILED: 'employee/update_details_failed',
+	DELETE_USER: 'employee/delete_user',
+	DELETE_USER_SUCCESS: 'employee/delete_user_success',
+	DELETE_USER_FAILED: 'employee/delete_user_failed',
 };
 
 export function registerUser(payload) {
@@ -28,8 +31,8 @@ export function getAllEmployees() {
 	return { type: employeeActionTypes.GET_ALL_EMPLOYEES };
 }
 
-export function updateUser(payload) {
-	return { type: employeeActionTypes.UPDATE_USER, payload };
+export function updateUser(id, payload) {
+	return { type: employeeActionTypes.UPDATE_USER, id, payload };
 }
 
 export function updateEmployeeDetails(payload) {

@@ -24,6 +24,8 @@ const EditEmployee = ({ selectedId }) => {
 			first_name: currentEmployee.first_name,
 			last_name: currentEmployee.last_name,
 			email: currentEmployee.email,
+			password: null,
+			confirm_password: null,
 			contact_no: currentEmployee.contact_no,
 			gender: currentEmployee.gender,
 			status: currentEmployee.status,
@@ -75,7 +77,7 @@ const EditEmployee = ({ selectedId }) => {
 			data.user.is_phone_verified = false;
 			delete data.user.confirm_password;
 
-			dispatch(updateUser(data.user));
+			dispatch(updateUser(selectedId, data.user));
 		};
 
 		return (
@@ -171,10 +173,9 @@ const EditEmployee = ({ selectedId }) => {
 						</div>
 						<div className="col-sm-6">
 							<div className="form-group">
-								<label className="col-form-label">
-									Password <span className="text-danger">*</span>
-								</label>
+								<label className="col-form-label">Password</label>
 								<input
+									placeholder="(unchanged)"
 									className="form-control"
 									autoComplete="new-password"
 									type="password"
@@ -184,11 +185,9 @@ const EditEmployee = ({ selectedId }) => {
 						</div>
 						<div className="col-sm-6">
 							<div className="form-group">
-								<label className="col-form-label">
-									Confirm Password <span className="text-danger">*</span>
-								</label>
+								<label className="col-form-label">Confirm Password</label>
 								<input
-									required
+									placeholder="(unchanged)"
 									className="form-control"
 									type="password"
 									{...register('user.confirm_password')}

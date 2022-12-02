@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { employeeActionTypes } from './employeeActions';
+import { employeeActionTypes, getAllEmployees } from './employeeActions';
 import { API } from '../../utils/axios';
 import { toast } from 'react-toastify';
 
@@ -27,6 +27,7 @@ export function* registerUserSaga({ payload }) {
 			type: employeeActionTypes.REGISTER_USER_SUCCESS,
 			data,
 		});
+		yield put(getAllEmployees());
 	} catch (e) {
 		toast.error(e.response?.data?.message || 'Error in registering user');
 		yield put({ type: employeeActionTypes.REGISTER_USER_FAILED });
@@ -42,6 +43,7 @@ export function* addEmployeeDetailsSaga({ payload }) {
 			type: employeeActionTypes.ADD_EMPLOYEE_DETAILS_SUCCESS,
 			data,
 		});
+		yield put(getAllEmployees());
 	} catch (e) {
 		toast.error(
 			e.response?.data?.message || 'Error in adding employee details'
@@ -51,14 +53,17 @@ export function* addEmployeeDetailsSaga({ payload }) {
 	}
 }
 
-export function* updateUserSaga({ payload }) {
+export function* updateUserSaga({ id, payload }) {
 	try {
-		const { data } = yield API.put(`users/admin/updateUser`, payload);
+		const { data } = yield API.put(`users/admin/updateUser`, payload, {
+			params: { id: id },
+		});
 		toast.success('User account updated successfully');
 		yield put({
 			type: employeeActionTypes.UPDATE_USER_SUCCESS,
 			data,
 		});
+		yield put(getAllEmployees());
 	} catch (e) {
 		toast.error(e.response?.data?.message || 'Error in updating user');
 		yield put({ type: employeeActionTypes.UPDATE_USER_FAILED });
@@ -77,6 +82,7 @@ export function* updateEmployeeDetailsSaga({ payload }) {
 			type: employeeActionTypes.UPDATE_EMPLOYEE_DETAILS_SUCCESS,
 			data,
 		});
+		yield put(getAllEmployees());
 	} catch (e) {
 		toast.error(
 			e.response?.data?.message || 'Error in updating employee details'

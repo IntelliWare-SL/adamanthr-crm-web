@@ -6,9 +6,11 @@ const initialState = {
 	employeesLoading: false,
 	userAccountFormLoading: false,
 	employeeDetailsFormLoading: false,
+	userDeleteLoading: false,
 	employees: null,
 	createdAccountUid: null,
 	updatedAccountUid: null,
+	deleteAccountUid: null,
 };
 
 function reducer(state = initialState, action) {
@@ -96,6 +98,23 @@ function reducer(state = initialState, action) {
 			return {
 				...state,
 				employeeDetailsFormLoading: false,
+			};
+		case employeeActionTypes.DELETE_USER:
+			return {
+				...state,
+				userDeleteLoading: true,
+			};
+		case employeeActionTypes.DELETE_USER_SUCCESS:
+			return {
+				...state,
+				userDeleteLoading: false,
+				deleteAccountUid: action.data.id,
+			};
+		case employeeActionTypes.DELETE_USER_FAILED:
+			return {
+				...state,
+				userDeleteLoading: false,
+				deleteAccountUid: null,
 			};
 		default:
 			return state;

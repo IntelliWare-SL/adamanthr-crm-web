@@ -130,6 +130,7 @@ const AddEmployee = () => {
 									Password <span className="text-danger">*</span>
 								</label>
 								<input
+									required
 									className="form-control"
 									autoComplete="new-password"
 									type="password"
