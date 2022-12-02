@@ -6,7 +6,7 @@ import {
 	updateUser,
 } from '../../redux/employee/employeeActions';
 
-const EditEmployee = ({ selectedId }) => {
+const EditEmployee = ({ selectedId, setSelectedId }) => {
 	const isUserAccountLoading = useSelector(
 		(state) => state.employee.userAccountFormLoading
 	);
@@ -270,7 +270,7 @@ const EditEmployee = ({ selectedId }) => {
 
 	const EmployeeDetailsScreen = () => {
 		const onSubmit = (data) => {
-			dispatch(updateEmployeeDetails(data.employee_details));
+			dispatch(updateEmployeeDetails(selectedId, data.employee_details));
 		};
 
 		return (
@@ -630,7 +630,13 @@ const EditEmployee = ({ selectedId }) => {
 	return (
 		<>
 			{/* Edit Employee Modal */}
-			<div id="edit_employee" className="modal custom-modal fade" role="dialog">
+			<div
+				id="edit_employee"
+				className="modal custom-modal fade"
+				role="dialog"
+				data-keyboard="false"
+				data-backdrop="static"
+			>
 				<div
 					className="modal-dialog modal-dialog-centered modal-lg"
 					role="document"
@@ -643,6 +649,7 @@ const EditEmployee = ({ selectedId }) => {
 								className="close"
 								data-bs-dismiss="modal"
 								aria-label="Close"
+								onClick={() => setSelectedId(null)}
 							>
 								<span aria-hidden="true">×</span>
 							</button>

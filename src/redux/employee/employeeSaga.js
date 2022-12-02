@@ -71,11 +71,14 @@ export function* updateUserSaga({ id, payload }) {
 	}
 }
 
-export function* updateEmployeeDetailsSaga({ payload }) {
+export function* updateEmployeeDetailsSaga({ id, payload }) {
 	try {
-		const { data } = yield API.post(
+		const { data } = yield API.put(
 			`users/admin/updateEmployeeDetails`,
-			payload
+			payload,
+			{
+				params: { id: id },
+			}
 		);
 		toast.success('Employee details updated successfully');
 		yield put({

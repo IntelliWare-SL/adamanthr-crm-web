@@ -209,8 +209,9 @@ const AllEmployees = () => {
 				<AddEmployee />
 				{/* /Add Employee Modal */}
 				{/* Edit Employee Modal */}
-				{selectedId && <EditEmployee selectedId={selectedId} />}
-				{/*{selectedUser && <EditEmployee currentData={selectedUser} />}*/}
+				{selectedId && (
+					<EditEmployee selectedId={selectedId} setSelectedId={setSelectedId} />
+				)}
 				{/* /Edit Employee Modal */}
 				{/* Delete Employee Modal */}
 				{selectedId && <DeleteEmployee selectedId={selectedId} />}

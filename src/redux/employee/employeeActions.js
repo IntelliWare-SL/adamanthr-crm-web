@@ -35,6 +35,6 @@ export function updateUser(id, payload) {
 	return { type: employeeActionTypes.UPDATE_USER, id, payload };
 }
 
-export function updateEmployeeDetails(payload) {
-	return { type: employeeActionTypes.UPDATE_EMPLOYEE_DETAILS, payload };
+export function updateEmployeeDetails(id, payload) {
+	return { type: employeeActionTypes.UPDATE_EMPLOYEE_DETAILS, id, payload };
 }
