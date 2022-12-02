@@ -31,7 +31,7 @@ const AllEmployees = () => {
 	});
 
 	useEffect(() => {
-		if (!employees) {
+		if (employees == null) {
 			dispatch(getAllEmployees());
 		}
 	}, []);
